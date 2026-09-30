@@ -1,1 +1,12 @@
-
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["FRHQ7F5R53.com.ttokong.healthylife"],
+        "components": [
+          { "/": "/invite/*", "comment": "친구 초대 링크" }
+        ]
+      }
+    ]
+  }
+}
