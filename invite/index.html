@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>또콩 친구 초대</title>
+<meta name="description" content="또콩의 건강한생활 친구 초대">
+<style>
+  :root { --bg:#F3F4EE; --card:#FFFFFF; --text:#1D221B; --sub:#5B6457; --line:#DDE1D6; --primary:#4F6B4B; --on:#FFFFFF; --soft:#DFE7D8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#131611; --card:#1C201A; --text:#E8ECE4; --sub:#A3AC9E; --line:#30362D; --primary:#A9C49F; --on:#172014; --soft:#2A3527; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+         font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+         display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+  main { width: 100%; max-width: 420px; background: var(--card); border-radius: 28px; padding: 32px 24px; }
+  .mark { width: 56px; height: 56px; border-radius: 16px; background: var(--soft); display: grid; place-items: center; margin-bottom: 20px; }
+  h1 { font-size: 24px; margin: 0 0 8px; letter-spacing: -0.4px; }
+  p { color: var(--sub); line-height: 1.55; margin: 0 0 20px; font-size: 15px; }
+  a.button { display: block; text-align: center; text-decoration: none; background: var(--primary); color: var(--on);
+             font-weight: 700; font-size: 16px; padding: 15px; border-radius: 14px; }
+  .code { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--sub); }
+  .code b { display: block; margin-top: 6px; font-family: ui-monospace, "SF Mono", monospace; font-size: 13px;
+            color: var(--text); word-break: break-all; font-weight: 600; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <div class="mark" aria-hidden="true">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M19 8v6M16 11h6"/></svg>
+  </div>
+  <h1>친구 초대가 왔어요</h1>
+  <p id="lead">또콩의 건강한생활 앱에서 초대를 수락하면 친구가 되고, 서로의 공개 목표를 볼 수 있어요.</p>
+  <a class="button" id="open" href="#">앱에서 열기</a>
+  <p style="margin-top:16px">앱이 아직 없다면, 초대한 친구에게 설치 방법을 물어본 뒤 이 링크를 다시 눌러 주세요.</p>
+  <div class="code" id="codebox">
+    링크가 앱에서 열리지 않으면, 앱의 <strong>친구 → 받은 링크로 추가</strong>에 이 페이지 주소를 붙여넣어 주세요.
+    <b id="code"></b>
+  </div>
+</main>
+<script>
+  var code = new URLSearchParams(location.search).get("c") || "";
+  if (/^[0-9a-f]{32}$/i.test(code)) {
+    document.getElementById("open").href = "ttokong://invite?c=" + code;
+    document.getElementById("code").textContent = location.href;
+  } else {
+    document.getElementById("lead").textContent = "초대 링크가 올바르지 않아요. 받은 링크를 다시 확인해 주세요.";
+    document.getElementById("open").classList.add("hidden");
+    document.getElementById("codebox").classList.add("hidden");
+  }
+</script>
+</body>
+</html>
